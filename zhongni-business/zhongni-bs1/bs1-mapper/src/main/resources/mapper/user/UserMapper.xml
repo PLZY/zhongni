@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongni.bs1.mapper.user.UserMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhongni.bs1.entity.db.user.User">
+        <id property="userId" column="user_id" jdbcType="BIGINT"/>
+        <result property="walletAddress" column="wallet_address" jdbcType="VARCHAR"/>
+        <result property="domainId" column="domain_id" jdbcType="VARCHAR"/>
+        <result property="nickName" column="nick_name" jdbcType="VARCHAR"/>
+        <result property="imagePath" column="image_path" jdbcType="VARCHAR"/>
+        <result property="passWord" column="pass_word" jdbcType="VARCHAR"/>
+        <result property="walletPassword" column="wallet_password" jdbcType="VARCHAR"/>
+        <result property="ownInvitationCode" column="own_invitation_code" jdbcType="VARCHAR"/>
+        <result property="inviterInvitationCode" column="inviter_invitation_code" jdbcType="VARCHAR"/>
+        <result property="emailAddress" column="email_address" jdbcType="VARCHAR"/>
+        <result property="userStatus" column="user_status" jdbcType="VARCHAR"/>
+        <result property="userType" column="user_type" jdbcType="VARCHAR"/>
+        <result property="createTime" column="create_time" jdbcType="TIMESTAMP"/>
+        <result property="updateTime" column="update_time" jdbcType="TIMESTAMP"/>
+        <result property="lastLoginTime" column="last_login_time" jdbcType="TIMESTAMP"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        user_id,wallet_address,domain_id,
+        nick_name,image_path,pass_word,wallet_password,own_invitation_code,inviter_invitation_code,
+        email_address,user_status,user_type,create_time,update_time,last_login_time
+    </sql>
+</mapper>

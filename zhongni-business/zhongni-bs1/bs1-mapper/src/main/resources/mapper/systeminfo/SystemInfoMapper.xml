@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongni.bs1.mapper.systeminfo.SystemInfoMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhongni.bs1.entity.db.systeminfo.SystemInfo">
+            <id property="id" column="id" jdbcType="INTEGER"/>
+            <result property="applicationName" column="application_name" jdbcType="VARCHAR"/>
+            <result property="deployHost" column="deploy_host" jdbcType="VARCHAR"/>
+            <result property="currentSystemVersion" column="current_system_version" jdbcType="VARCHAR"/>
+            <result property="lastUpdateDatetime" column="last_update_datetime" jdbcType="TIMESTAMP"/>
+            <result property="lastUpdateStatus" column="last_update_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,application_name,deploy_host,
+        current_system_version,last_update_datetime,last_update_status
+    </sql>
+</mapper>

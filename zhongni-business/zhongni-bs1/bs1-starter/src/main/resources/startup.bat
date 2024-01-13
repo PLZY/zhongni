@@ -1,0 +1,2 @@
+chcp 65001
+java -Xms1024m -Xmx1024m -XX:MetaspaceSize=128m -XX:MaxMetaspaceSize=512m -XX:+UseG1GC -XX:MaxGCPauseMillis=100 -XX:+PrintGCDetails -XX:+PrintGCDateStamps -Xloggc:gc.log -Dfile.encoding=utf-8 -jar server.jar

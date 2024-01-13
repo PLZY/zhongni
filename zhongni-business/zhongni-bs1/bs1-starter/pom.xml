@@ -1,0 +1,225 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.zhongni</groupId>
+        <artifactId>zhongni-bs1</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>bs1-starter</artifactId>
+    <version>1.0.0</version>
+    <name>bs1-starter</name>
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <output.dependence.file.path>lib/</output.dependence.file.path>
+        <output.resource.file.path>resources/</output.resource.file.path>
+        <target.class-path>target/classes/</target.class-path>
+        <final-business-path>target/${project.artifactId}</final-business-path>
+        <final-res-path>${final-business-path}/resources</final-res-path>
+        <app-name>${project.artifactId}-${project.version}</app-name>
+        <real-app-name>server</real-app-name>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zhongni</groupId>
+            <artifactId>bs1-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zhongni</groupId>
+            <artifactId>bs1-task</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    <build>
+        <plugins>
+            <!-- 跳过单元测试 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-surefire-plugin</artifactId>
+                <configuration>
+                    <skipTests>true</skipTests>
+                </configuration>
+            </plugin>
+
+            <!-- 打JAR包，不包含依赖的resources文件；显式剔除配置文件 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-jar-plugin</artifactId>
+                <configuration>
+                    <!-- 剔除配置文件 -->
+                    <excludes>
+                        <exclude>*.properties</exclude>
+                        <exclude>*.yml</exclude>
+                        <exclude>*.xml</exclude>
+                        <exclude>*.txt</exclude>
+                        <exclude>*.sh</exclude>
+                        <exclude>*.bat</exclude>
+                        <exclude>*.cmd</exclude>
+                        <exclude>**/static/**</exclude>
+                        <exclude>**/templates/**</exclude>
+                        <exclude>**/db/**</exclude>
+                    </excludes>
+                    <archive>
+                        <manifest>
+                            <addClasspath>true</addClasspath>
+                            <!-- MANIFEST.MF 中 Class-Path 各个依赖加入前缀 -->
+                            <!--lib文件夹内容，需要 maven-dependency-plugin插件补充-->
+                            <classpathPrefix>${output.dependence.file.path}</classpathPrefix>
+                            <!-- jar包不包含唯一版本标识 -->
+                            <useUniqueVersions>false</useUniqueVersions>
+                            <!--指定入口类 -->
+                            <mainClass>com.zhongni.bs1.starter.ZhongniApplication</mainClass>
+                        </manifest>
+                        <manifestEntries>
+                            <!--MANIFEST.MF 中 Class-Path 加入自定义路径，多个路径用空格隔开 -->
+                            <!--此处resources文件夹的内容，需要maven-resources-plugin插件补充上-->
+                            <Class-Path>./${output.resource.file.path}</Class-Path>
+                        </manifestEntries>
+                    </archive>
+                    <outputDirectory>${project.build.directory}</outputDirectory>
+                </configuration>
+            </plugin>
+
+            <!-- 复制依赖的jar包到指定的文件夹里 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-dependency-plugin</artifactId>
+                <executions>
+                    <execution>
+                        <id>copy-dependencies</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy-dependencies</goal>
+                        </goals>
+                        <configuration>
+                            <outputDirectory>${project.build.directory}/${output.dependence.file.path}</outputDirectory>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <!-- 将maven打包后的原始文件路径进行进一步的整理 -->
+            <plugin>
+                <groupId>org.apache.maven.plugins</groupId>
+                <artifactId>maven-antrun-plugin</artifactId>
+                <version>1.8</version>
+                <executions>
+                    <execution>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>run</goal>
+                        </goals>
+                        <configuration>
+                            <target>
+                                <delete dir="${final-business-path}"/>
+                                <mkdir dir="${final-business-path}"/>
+                                <mkdir dir="${final-res-path}"/>
+                                <mkdir dir="${final-res-path}/static"/>
+                                <copy file="target/${app-name}.jar" tofile="${final-business-path}/${real-app-name}.jar"/>
+                                <move todir="${final-business-path}/lib">
+                                    <fileset dir="target/lib"/>
+                                </move>
+                                <!-- 转移资源文件到${final-res-path}路径 -->
+                                <copy todir="${final-res-path}">
+                                    <fileset dir="${target.class-path}">
+                                        <include name="**/static/**"/>
+                                        <include name="**/templates/**"/>
+                                        <include name="**/db/**"/>
+                                        <include name="**/*.txt"/>
+                                        <include name="**/*.properties"/>
+                                        <include name="**/*.keystore"/>
+                                        <include name="**/*.yml"/>
+                                        <include name="**/*.csv"/>
+                                        <include name="**/*.xml"/>
+                                        <!-- 版本号文件直接放到根目录，不需要转移到resources文件夹 -->
+                                        <exclude name="**/Version.txt"/>
+                                    </fileset>
+                                </copy>
+                                <!-- 转移执行文件到${final-business-path}路径 -->
+                                <copy todir="${final-business-path}">
+                                    <fileset dir="${target.class-path}">
+                                        <include name="**/*.bat"/>
+                                        <include name="**/*.sh"/>
+                                        <include name="**/*.cmd"/>
+                                        <include name="**/Version.txt"/>
+                                    </fileset>
+                                </copy>
+                            </target>
+                        </configuration>
+                    </execution>
+                </executions>
+            </plugin>
+
+            <plugin>
+                <groupId>pl.project13.maven</groupId>
+                <artifactId>git-commit-id-plugin</artifactId>
+                <version>2.2.6</version>
+                <executions>
+                    <execution>
+                        <goals>
+                            <goal>revision</goal>
+                        </goals>
+                    </execution>
+                </executions>
+                <configuration>
+                    <excludeProperties>
+                        <excludeProperty>^git.local.branch.*$</excludeProperty>
+                        <excludeProperty>^git.commit.message.*$</excludeProperty>
+                        <excludeProperty>^git.commit.user.*$</excludeProperty>
+                        <excludeProperty>^git.build.user.*$</excludeProperty>
+                        <excludeProperty>^git.build.host.*$</excludeProperty>
+                        <excludeProperty>^git.closest.tag.*$</excludeProperty>
+                        <excludeProperty>^git.commit.id.abbrev.*$</excludeProperty>
+                        <excludeProperty>^git.commit.id.describe.*$</excludeProperty>
+                        <excludeProperty>^git.tags.*$</excludeProperty>
+                        <excludeProperty>^git.dirty.*$</excludeProperty>
+                        <excludeProperty>^git.total.commit.count.*$</excludeProperty>
+                    </excludeProperties>
+                    <!--日期格式;默认值:dd.MM.yyyy '@' HH:mm:ss z;-->
+                    <dateFormat>yyyyMMddHHmmss</dateFormat>
+                    <!--,构建过程中,是否打印详细信息;默认值:false;-->
+                    <verbose>true</verbose>
+                    <!-- ".git"文件路径;默认值:${project.basedir}/.git; -->
+                    <dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+                    <!--若项目打包类型为pom,是否取消构建;默认值:true;-->
+                    <skipPoms>false</skipPoms>
+                    <!--是否生成"git.properties"文件;默认值:false;-->
+                    <generateGitPropertiesFile>true</generateGitPropertiesFile>
+                    <!--指定"git.properties"文件的存放路径(相对于${project.basedir}的一个路径);-->
+                    <generateGitPropertiesFilename>/src/main/resources/Version.txt</generateGitPropertiesFilename>
+                    <!--".git"文件夹未找到时,构建是否失败;若设置true,则构建失败;若设置false,则跳过执行该目标;默认值:true;-->
+                    <failOnNoGitDirectory>true</failOnNoGitDirectory>
+                    <!--git描述配置,可选;由JGit提供实现;-->
+                    <gitDescribe>
+                        <!--是否生成描述属性-->
+                        <skip>false</skip>
+                        <!--提交操作未发现tag时,仅打印提交操作ID,-->
+                        <always>false</always>
+                        <!--提交操作ID显式字符长度,最大值为:40;默认值:7;
+                            0代表特殊意义;后面有解释;
+                        -->
+                        <abbrev>7</abbrev>
+                        <!--构建触发时,代码有修改时(即"dirty state"),添加指定后缀;默认值:"";-->
+                        <dirty>-dirty</dirty>
+                        <!--always print using the "tag-commits_from_tag-g_commit_id-maybe_dirty" format, even if "on" a tag.
+                            The distance will always be 0 if you're "on" the tag.
+                        -->
+                        <forceLongFormat>false</forceLongFormat>
+                    </gitDescribe>
+                </configuration>
+            </plugin>
+        </plugins>
+    </build>
+</project>

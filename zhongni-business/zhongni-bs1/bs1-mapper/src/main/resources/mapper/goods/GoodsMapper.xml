@@ -1,0 +1,20 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.zhongni.bs1.mapper.goods.GoodsMapper">
+
+    <resultMap id="BaseResultMap" type="com.zhongni.bs1.entity.db.goods.Goods">
+            <id property="goodsCode" column="goods_code" jdbcType="VARCHAR"/>
+            <result property="goodsTitle" column="goods_title" jdbcType="VARCHAR"/>
+            <result property="goodsPrice" column="goods_price" jdbcType="BIGINT"/>
+            <result property="goodsOrder" column="goods_order" jdbcType="INTEGER"/>
+            <result property="goodsParent" column="goods_parent" jdbcType="VARCHAR"/>
+            <result property="goodsStatus" column="goods_status" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        goods_code,goods_title,goods_price,
+        goods_order,goods_parent,goods_status
+    </sql>
+</mapper>

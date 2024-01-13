@@ -1,0 +1,1 @@
+select * from squid_system_info;
