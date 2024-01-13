@@ -32,7 +32,7 @@ __________________________
 
 **zhongni-bs1 - 业务系统1** <br/>
 1) ***bs1-start（引导模块）*** <br/>
-   > MeigancaiFrameworApplication.java - 系统启动类 <br/>
+   > ZhonniApplication.java - 系统启动类 <br/>
    > resources - 包含系统、日志配置文件、数据库脚本、启停脚本、项目版本信息、邮件模板静态文件等 <br/>
 
 2) ***bs1-common（公共依赖模块）*** <br/>
@@ -184,7 +184,7 @@ public class LoginInterceptor {
 }
 ```
 ## 2、maven依赖规范
-- 所有新增的maven依赖必须统一声明到父级目录的pom.xml中进行统一的版本管理，然后哪个层级需要使用，则再自行引入。具体可参考meigancaiframework-common层级中引入的pagehelper-spring-boot-starter依赖如下
+- 所有新增的maven依赖必须统一声明到父级目录的pom.xml中进行统一的版本管理，然后哪个层级需要使用，则再自行引入。具体可参考bs1-common层级中引入的pagehelper-spring-boot-starter依赖如下
 ```xml
 <dependency>
     <groupId>com.github.pagehelper</groupId>
@@ -194,7 +194,7 @@ public class LoginInterceptor {
 
 # 四、脚本简介
 ## 1、数据库脚本
-1. **在meigancaiframework-starter\src\main\resources\db目录下会分列着各个版本的数据库脚本文件夹，文件夹名称代表的就是版本号，
+1. **在bs1-starter\src\main\resources\db目录下会分列着各个版本的数据库脚本文件夹，文件夹名称代表的就是版本号，
 一般就是创建文件夹那天的8位日期+3位序号。如果需要新增数据库脚本那么新增的文件夹版本号必须要比里面最新版本号还要大，
 因为系统在执行数据库脚本时会根据文件名从小到大依次执行**
 2. **每次项目启动时会自动扫描数据库（如果数据库或者表不存在目前已经支持自动创建，不需要担心）
@@ -207,5 +207,5 @@ public class LoginInterceptor {
 
 
 ## 2、打包脚本
-1. **在项目的根目录下存在package.bat脚本，双击可以进行Maven的一键打包，其中maven打包的各种配置存在于meigancaiframework-starter\pom.xml里**
-2. **打包成功后会在meigancaiframework-starter\target\下生成一个名为meigancaiframework-starter的文件夹。该文件夹下包含的就是整个当前项目的内容，将整个文件夹拷贝出来部署到服务器即可，具体配置修改以及启停请查看部署文档中的相关说明**
+1. **在项目的根目录下存在package.bat脚本，双击可以进行Maven的一键打包，其中maven打包的各种配置存在于bs1-starter\pom.xml里**
+2. **打包成功后会在bs1-starter\target\下生成一个名为bs1-starter的文件夹。该文件夹下包含的就是整个当前项目的内容，将整个文件夹拷贝出来部署到服务器即可，具体配置修改以及启停请查看部署文档中的相关说明**
