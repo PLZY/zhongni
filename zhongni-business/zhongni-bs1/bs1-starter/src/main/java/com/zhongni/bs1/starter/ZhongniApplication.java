@@ -6,6 +6,7 @@ import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
 import org.springframework.boot.autoconfigure.jdbc.DataSourceAutoConfiguration;
+import org.springframework.context.annotation.ComponentScan;
 import org.springframework.context.annotation.PropertySource;
 import org.springframework.scheduling.annotation.EnableScheduling;
 
@@ -13,12 +14,13 @@ import java.net.InetAddress;
 import java.net.UnknownHostException;
 
 @MapperScan("com.zhongni.bs1.mapper")
+@ComponentScan(basePackages={"com.zhongni"})
 @EnableScheduling
 @EnableMPP
 @Slf4j
 @PropertySource(value = {"classpath:cust-business.properties", "classpath:cust-email.properties"})
 // 排除DataSourceAutoConfiguration自动配置类，后续自动创建数据库时会在配置类中进行配置
-@SpringBootApplication(scanBasePackages = {"com.zhongni"}, exclude = {DataSourceAutoConfiguration.class})
+@SpringBootApplication(exclude = {DataSourceAutoConfiguration.class})
 public class ZhongniApplication {
 
 	public static void main(String[] args) {

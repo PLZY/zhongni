@@ -49,7 +49,7 @@ public class InitSystemInfo implements ApplicationRunner {
     public void run(ApplicationArguments args)
     {
         log.info("execute init system info after springboot start...");
-        //initTableAndData();
+        initTableAndData();
         log.info("execute end...");
     }
 

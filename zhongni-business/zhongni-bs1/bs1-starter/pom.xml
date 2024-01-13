@@ -29,7 +29,7 @@
     <dependencies>
         <dependency>
             <groupId>com.zhongni</groupId>
-            <artifactId>bs1-service</artifactId>
+            <artifactId>bs1-controller</artifactId>
         </dependency>
         <dependency>
             <groupId>com.zhongni</groupId>

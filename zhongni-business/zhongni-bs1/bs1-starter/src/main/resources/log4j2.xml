@@ -30,7 +30,7 @@
             <PatternLayout pattern="${PATTERN}"/>
             <Policies>
                 <TimeBasedTriggeringPolicy/>
-                <SizeBasedTriggeringPolicy size="20 MB"/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
             </Policies>
             <!-- 指定最多保存的文件个数 -->
             <DefaultRolloverStrategy max="30"/>

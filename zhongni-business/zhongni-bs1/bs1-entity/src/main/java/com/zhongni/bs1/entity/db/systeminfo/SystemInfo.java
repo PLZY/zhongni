@@ -4,9 +4,10 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import lombok.Data;
+
 import java.io.Serializable;
 import java.util.Date;
-import lombok.Data;
 
 /**
  * 
@@ -47,11 +48,11 @@ public class SystemInfo implements Serializable {
     /**
      */
     @TableField(value = "current_system_version")
-    private Date currentSystemVersion;
+    private String currentSystemVersion;
     /**
      */
     @TableField(value = "last_update_status")
-    private Date lastUpdateStatus;
+    private String lastUpdateStatus;
 
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;

@@ -1,8 +1,8 @@
 package com.zhongni.bs1.controller.goods;
 
 import com.zhongni.bs1.common.resp.CommonResponse;
-import com.zhongni.bs1.core.service.local.goods.GoodsService;
 import com.zhongni.bs1.entity.dto.goods.GoodsOutDTO;
+import com.zhongni.bs1.service.service.local.goods.GoodsService;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
