@@ -208,6 +208,7 @@
                         <excludeProperty>^git.tags.*$</excludeProperty>
                         <excludeProperty>^git.dirty.*$</excludeProperty>
                         <excludeProperty>^git.total.commit.count.*$</excludeProperty>
+                        <excludeProperty>^git.remote.origin.*$</excludeProperty>
                     </excludeProperties>
                     <!--日期格式;默认值:dd.MM.yyyy '@' HH:mm:ss z;-->
                     <dateFormat>yyyyMMddHHmmss</dateFormat>
