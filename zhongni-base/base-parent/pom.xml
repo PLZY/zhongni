@@ -30,6 +30,8 @@
         <lucene-version>8.11.2</lucene-version>
         <redission-version>3.19.0</redission-version>
         <UserAgentUtils-version>1.21</UserAgentUtils-version>
+        <nacos-version>2.2.3.RELEASE</nacos-version>
+        <spring-cloud-gateway-version>2.2.3.RELEASE</spring-cloud-gateway-version>
     </properties>
 
     <dependencyManagement>
@@ -41,6 +43,26 @@
                 <version>${spring-boot-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- nacos-config配置中心依赖 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
+                <version>${nacos-version}</version>
+            </dependency>
+            <!-- nacos-discovery注册中心依赖 -->
+            <dependency>
+                <groupId>com.alibaba.cloud</groupId>
+                <artifactId>spring-cloud-starter-alibaba-nacos-discovery</artifactId>
+                <version>${nacos-version}</version>
+            </dependency>
+
+            <!--在springboot的pom文件中，该依赖已经集成了springMVC等web启动器，不需要再添加spring-boot-starter-web 依赖了-->
+            <dependency>
+                <groupId>org.springframework.cloud</groupId>
+                <artifactId>spring-cloud-starter-gateway</artifactId>
+                <version>${spring-cloud-gateway-version}</version>
             </dependency>
 
             <!-- mysql驱动引入 -->
