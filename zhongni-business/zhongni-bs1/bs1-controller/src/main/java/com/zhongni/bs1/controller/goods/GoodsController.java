@@ -25,4 +25,9 @@ public class GoodsController {
         List<GoodsOutDTO> goods = goodsService.listGoods();
         return CommonResponse.success(goods);
     }
+    @GetMapping("/list1")
+    public CommonResponse<List<GoodsOutDTO>> listGoods1(){
+        List<GoodsOutDTO> goods = goodsService.listGoods();
+        return CommonResponse.success(goods);
+    }
 }

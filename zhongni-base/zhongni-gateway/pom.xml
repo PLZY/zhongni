@@ -1,0 +1,406 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+	<modelVersion>4.0.0</modelVersion>
+	<groupId>com.zhongni</groupId>
+	<artifactId>zhongni-gateway</artifactId>
+	<version>1.0.0</version>
+	<name>zhongni-gateway</name>
+	<description>Demo project for Spring Boot</description>
+	<properties>
+		<java.version>1.8</java.version>
+		<spring-boot-version>2.3.12.RELEASE</spring-boot-version>
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<java.version>1.8</java.version>
+		<mysql.connector-version>8.0.30</mysql.connector-version>
+		<mybatis-plus-version>3.4.2</mybatis-plus-version>
+		<mybatis-plus-mpp>1.5.1-RELEASE</mybatis-plus-mpp>
+		<commons-codec-version>1.15</commons-codec-version>
+		<log4j2.version>2.15.0</log4j2.version>
+		<commons-lang3-version>3.12.0</commons-lang3-version>
+		<pagehelper-version>1.4.6</pagehelper-version>
+		<fastjson-version>1.2.83</fastjson-version>
+		<lucene-version>8.11.2</lucene-version>
+		<redission-version>3.19.0</redission-version>
+		<UserAgentUtils-version>1.21</UserAgentUtils-version>
+
+		<maven.compiler.source>8</maven.compiler.source>
+		<maven.compiler.target>8</maven.compiler.target>
+		<project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+		<output.dependence.file.path>lib/</output.dependence.file.path>
+		<output.resource.file.path>resources/</output.resource.file.path>
+		<target.class-path>target/classes/</target.class-path>
+		<final-res-path>${project.artifactId}/resources</final-res-path>
+		<app-name>${project.artifactId}-${project.version}</app-name>
+		<real-app-name>server</real-app-name>
+	</properties>
+	<dependencyManagement>
+		<dependencies>
+			<!-- SpringBoot 依赖-->
+			<dependency>
+				<groupId>org.springframework.boot</groupId>
+				<artifactId>spring-boot-starter-parent</artifactId>
+				<version>${spring-boot-version}</version>
+				<type>pom</type>
+				<scope>import</scope>
+			</dependency>
+
+			<!-- mysql驱动引入 -->
+			<dependency>
+				<groupId>mysql</groupId>
+				<artifactId>mysql-connector-java</artifactId>
+				<version>${mysql.connector-version}</version>
+			</dependency>
+
+			<!-- mybatis-plus依赖引入 -->
+			<dependency>
+				<groupId>com.baomidou</groupId>
+				<artifactId>mybatis-plus-boot-starter</artifactId>
+				<version>${mybatis-plus-version}</version>
+			</dependency>
+
+			<!-- mybatis-plus多主键依赖引入 -->
+			<dependency>
+				<groupId>com.github.jeffreyning</groupId>
+				<artifactId>mybatisplus-plus</artifactId>
+				<version>${mybatis-plus-mpp}</version>
+			</dependency>
+
+			<!-- RSA加解密BASE64依赖 -->
+			<dependency>
+				<groupId>commons-codec</groupId>
+				<artifactId>commons-codec</artifactId>
+				<version>${commons-codec-version}</version>
+			</dependency>
+
+			<dependency>
+				<groupId>org.apache.commons</groupId>
+				<artifactId>commons-lang3</artifactId>
+				<version>${commons-lang3-version}</version>
+			</dependency>
+			<!-- 分页插件 -->
+			<dependency>
+				<groupId>com.github.pagehelper</groupId>
+				<artifactId>pagehelper-spring-boot-starter</artifactId>
+				<version>${pagehelper-version}</version>
+			</dependency>
+			<!-- Caffeine计算对象大小使用 -->
+			<dependency>
+				<groupId>org.apache.lucene</groupId>
+				<artifactId>lucene-core</artifactId>
+				<version>${lucene-version}</version>
+			</dependency>
+			<!-- fastjson -->
+			<dependency>
+				<groupId>com.alibaba</groupId>
+				<artifactId>fastjson</artifactId>
+				<version>${fastjson-version}</version>
+			</dependency>
+			<!-- 分布式锁 -->
+			<dependency>
+				<groupId>org.redisson</groupId>
+				<artifactId>redisson</artifactId>
+				<version>${redission-version}</version>
+			</dependency>
+			<!-- 记录前端请求的ip url等信息的依赖 -->
+			<dependency>
+				<groupId>eu.bitwalker</groupId>
+				<artifactId>UserAgentUtils</artifactId>
+				<version>${UserAgentUtils-version}</version>
+			</dependency>
+		</dependencies>
+	</dependencyManagement>
+
+
+	<dependencies>
+		<!-- 所有子工程都需要的依赖，直接在父工程中声明  -->
+		<dependency>
+			<groupId>com.alibaba</groupId>
+			<artifactId>fastjson</artifactId>
+		</dependency>
+
+		<!-- caffeine 本地缓存-->
+		<dependency>
+			<groupId>com.github.ben-manes.caffeine</groupId>
+			<artifactId>caffeine</artifactId>
+		</dependency>
+
+		<!-- Redis缓存-->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-data-redis</artifactId>
+		</dependency>
+
+		<!-- 联合主键所需依赖 -->
+		<dependency>
+			<groupId>com.github.jeffreyning</groupId>
+			<artifactId>mybatisplus-plus</artifactId>
+		</dependency>
+
+		<!-- lombok依赖 -->
+		<dependency>
+			<groupId>org.projectlombok</groupId>
+			<artifactId>lombok</artifactId>
+		</dependency>
+
+		<!-- 排除所有springboot默认使用的日志依赖 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-logging</artifactId>
+			<exclusions>
+				<exclusion>
+					<groupId>*</groupId>
+					<artifactId>*</artifactId>
+				</exclusion>
+			</exclusions>
+		</dependency>
+
+		<!-- 使用log4j2日志 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-log4j2</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.apache.commons</groupId>
+			<artifactId>commons-lang3</artifactId>
+		</dependency>
+
+		<!--  统一异常处理以及一些配置类会用到 -->
+		<dependency>
+			<groupId>org.springframework.boot</groupId>
+			<artifactId>spring-boot-starter-web</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>eu.bitwalker</groupId>
+			<artifactId>UserAgentUtils</artifactId>
+		</dependency>
+
+		<!-- RSA加解密会用到Base64工具类 -->
+		<dependency>
+			<groupId>commons-codec</groupId>
+			<artifactId>commons-codec</artifactId>
+		</dependency>
+
+		<!-- 分页 PageResponse对象依赖， core entity层依赖 -->
+		<dependency>
+			<groupId>com.github.pagehelper</groupId>
+			<artifactId>pagehelper-spring-boot-starter</artifactId>
+		</dependency>
+
+		<!-- mybatisPlus MyBatisPlusConfig对象依赖,Mapper层依赖 -->
+		<dependency>
+			<groupId>com.baomidou</groupId>
+			<artifactId>mybatis-plus-boot-starter</artifactId>
+		</dependency>
+	</dependencies>
+
+	<build>
+		<plugins>
+			<!-- 跳过单元测试 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-surefire-plugin</artifactId>
+				<configuration>
+					<skipTests>true</skipTests>
+				</configuration>
+			</plugin>
+
+			<!-- 打JAR包，不包含依赖的resources文件；显式剔除配置文件 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-jar-plugin</artifactId>
+				<configuration>
+					<!-- 剔除配置文件 -->
+					<excludes>
+						<exclude>*.properties</exclude>
+						<exclude>*.yml</exclude>
+						<exclude>*.xml</exclude>
+						<exclude>*.sh</exclude>
+						<exclude>*.bat</exclude>
+						<exclude>*.cmd</exclude>
+						<exclude>**/static/**</exclude>
+						<exclude>**/templates/**</exclude>
+						<exclude>**/db/**</exclude>
+						<exclude>**/Version.txt</exclude>
+					</excludes>
+					<archive>
+						<manifest>
+							<addClasspath>true</addClasspath>
+							<!-- MANIFEST.MF 中 Class-Path 各个依赖加入前缀 -->
+							<!--lib文件夹内容，需要 maven-dependency-plugin插件补充-->
+							<classpathPrefix>${output.dependence.file.path}</classpathPrefix>
+							<!-- jar包不包含唯一版本标识 -->
+							<useUniqueVersions>false</useUniqueVersions>
+							<!--指定入口类 -->
+							<mainClass>com.zhongni.gateway.ZhongniGatewayApplication</mainClass>
+						</manifest>
+						<manifestEntries>
+							<!--MANIFEST.MF 中 Class-Path 加入自定义路径，多个路径用空格隔开 -->
+							<!--此处resources文件夹的内容，需要maven-resources-plugin插件补充上-->
+							<Class-Path>./${output.resource.file.path}</Class-Path>
+						</manifestEntries>
+					</archive>
+					<outputDirectory>${project.build.directory}</outputDirectory>
+				</configuration>
+			</plugin>
+
+			<!-- 复制依赖的jar包到指定的文件夹里 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-dependency-plugin</artifactId>
+				<executions>
+					<!-- 复制入口jar包到对应目录下 -->
+					<execution>
+						<id>copy-app-jar</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy</goal>
+						</goals>
+						<configuration>
+							<artifactItems>
+								<artifactItem>
+									<groupId>${project.groupId}</groupId>
+									<artifactId>${project.artifactId}</artifactId>
+									<version>${project.version}</version>
+									<type>jar</type>
+									<overWrite>true</overWrite>
+									<outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+									<destFileName>${real-app-name}.jar</destFileName>
+								</artifactItem>
+							</artifactItems>
+						</configuration>
+					</execution>
+					<!-- 复制所有的依赖jar包到lib目录下 -->
+					<execution>
+						<id>copy-dependencies</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-dependencies</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}/${output.dependence.file.path}</outputDirectory>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<!-- 复制依赖的jar包与资源文件，进行目录整合 -->
+			<plugin>
+				<groupId>org.apache.maven.plugins</groupId>
+				<artifactId>maven-resources-plugin</artifactId>
+				<version>3.2.0</version>
+				<executions>
+					<execution>
+						<id>copy-resources</id>
+						<phase>package</phase>
+						<goals>
+							<goal>copy-resources</goal>
+						</goals>
+						<configuration>
+							<outputDirectory>${project.build.directory}</outputDirectory>
+							<resources>
+								<resource>
+									<directory>target/lib</directory>
+									<includes>
+										<include>*</include>
+									</includes>
+									<targetPath>${project.artifactId}/lib</targetPath>
+								</resource>
+								<resource>
+									<directory>${target.class-path}</directory>
+									<includes>
+										<include>**/static/**</include>
+										<include>**/templates/**</include>
+										<include>**/db/**</include>
+										<include>**/*.properties</include>
+										<include>**/*.keystore</include>
+										<include>**/*.yml</include>
+										<include>**/*.csv</include>
+										<include>**/*.xml</include>
+										<include>**/Version.txt</include>
+									</includes>
+									<targetPath>${final-res-path}</targetPath>
+								</resource>
+								<resource>
+									<directory>${target.class-path}</directory>
+									<includes>
+										<include>**/*.bat</include>
+										<include>**/*.sh</include>
+										<include>**/*.cmd</include>
+										<include>**/Version.txt</include>
+									</includes>
+									<targetPath>${project.artifactId}</targetPath>
+								</resource>
+							</resources>
+						</configuration>
+					</execution>
+				</executions>
+			</plugin>
+
+			<plugin>
+				<groupId>pl.project13.maven</groupId>
+				<artifactId>git-commit-id-plugin</artifactId>
+				<version>2.2.6</version>
+				<executions>
+					<execution>
+						<goals>
+							<goal>revision</goal>
+						</goals>
+					</execution>
+				</executions>
+				<configuration>
+					<excludeProperties>
+						<excludeProperty>^git.local.branch.*$</excludeProperty>
+						<excludeProperty>^git.commit.message.*$</excludeProperty>
+						<excludeProperty>^git.commit.user.*$</excludeProperty>
+						<excludeProperty>^git.build.user.*$</excludeProperty>
+						<excludeProperty>^git.build.host.*$</excludeProperty>
+						<excludeProperty>^git.closest.tag.*$</excludeProperty>
+						<excludeProperty>^git.commit.id.abbrev.*$</excludeProperty>
+						<excludeProperty>^git.commit.id.describe.*$</excludeProperty>
+						<excludeProperty>^git.tags.*$</excludeProperty>
+						<excludeProperty>^git.dirty.*$</excludeProperty>
+						<excludeProperty>^git.total.commit.count.*$</excludeProperty>
+						<excludeProperty>^git.remote.origin.*$</excludeProperty>
+					</excludeProperties>
+					<!--日期格式;默认值:dd.MM.yyyy '@' HH:mm:ss z;-->
+					<dateFormat>yyyyMMddHHmmss</dateFormat>
+					<!--,构建过程中,是否打印详细信息;默认值:false;-->
+					<verbose>true</verbose>
+					<!-- ".git"文件路径;默认值:${project.basedir}/.git; -->
+					<dotGitDirectory>${project.basedir}/.git</dotGitDirectory>
+					<!--若项目打包类型为pom,是否取消构建;默认值:true;-->
+					<skipPoms>false</skipPoms>
+					<!--是否生成"git.properties"文件;默认值:false;-->
+					<generateGitPropertiesFile>true</generateGitPropertiesFile>
+					<!--指定"git.properties"文件的存放路径(相对于${project.basedir}的一个路径);-->
+					<generateGitPropertiesFilename>/src/main/resources/Version.txt</generateGitPropertiesFilename>
+					<!--".git"文件夹未找到时,构建是否失败;若设置true,则构建失败;若设置false,则跳过执行该目标;默认值:true;-->
+					<failOnNoGitDirectory>true</failOnNoGitDirectory>
+					<!--git描述配置,可选;由JGit提供实现;-->
+					<gitDescribe>
+						<!--是否生成描述属性-->
+						<skip>false</skip>
+						<!--提交操作未发现tag时,仅打印提交操作ID,-->
+						<always>false</always>
+						<!--提交操作ID显式字符长度,最大值为:40;默认值:7;
+                            0代表特殊意义;后面有解释;
+                        -->
+						<abbrev>7</abbrev>
+						<!--构建触发时,代码有修改时(即"dirty state"),添加指定后缀;默认值:"";-->
+						<dirty>-dirty</dirty>
+						<!--always print using the "tag-commits_from_tag-g_commit_id-maybe_dirty" format, even if "on" a tag.
+                            The distance will always be 0 if you're "on" the tag.
+                        -->
+						<forceLongFormat>false</forceLongFormat>
+					</gitDescribe>
+				</configuration>
+			</plugin>
+		</plugins>
+	</build>
+
+</project>

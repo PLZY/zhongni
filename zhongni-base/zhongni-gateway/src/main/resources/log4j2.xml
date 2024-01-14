@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="utf-8"?>
+<configuration>
+    <properties>
+        <!-- 文件输出格式 -->
+        <property name="PATTERN">[${sys:local-ip}] - %d{yyyy-MM-dd HH:mm:ss.SSS} |-%-5level [%thread] %c-| %msg%n</property>
+        <!-- 文件输出格式 -->
+        <property name="ERR_PATTERN">[${sys:local-ip}] - %d{yyyy-MM-dd HH:mm:ss.SSS} |-%-5level [%thread] %c-| %msg%n</property>
+    </properties>
+
+    <appenders>
+        <!--这个输出控制台的配置-->
+        <Console name="console-log" target="SYSTEM_OUT">
+            <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            <!--输出日志的格式-->
+            <PatternLayout pattern="${PATTERN}"/>
+        </Console>
+
+        <!--文件会打印出所有信息，这个log每次运行程序会自动清空，由append属性决定，这个也挺有用的，适合临时测试用-->
+        <File name="temp-log" fileName="./log/temp.log" append="false">
+            <PatternLayout pattern="${PATTERN}"/>
+        </File>
+
+        <!-- RollingFile与RollingRandomAccessFile不同的是，RollingRandomAccessFile默认日志文件写入策略为异步刷盘，RollingRandomAccessFile会将日志信息先写入到缓冲区，然后缓冲区满后刷到磁盘，并清空缓冲区，默认缓冲区的大小在8-256kb，具体大小需要自己设置 -->
+        <!-- 可以指定当文件达到一定大小（如20MB）时，另起一个文件继续写入日志, filePattern：指定当发生Rolling时，文件的转移和重命名规则 -->
+        <RollingFile name="RollingFileInfo" fileName="./log/business-info.log"
+                     filePattern="./log/$${date:yyyy-MM}/info-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="debug" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="${PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="50 MB"/>
+            </Policies>
+            <!-- 指定最多保存的文件个数 -->
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <RollingFile name="RollingFileError" fileName="./log/business-error.log"
+                     filePattern="./log/$${date:yyyy-MM}/error-%d{yyyy-MM-dd}-%i.log">
+            <Filters>
+                <ThresholdFilter level="ERROR" onMatch="ACCEPT" onMismatch="DENY"/>
+            </Filters>
+            <PatternLayout pattern="${ERR_PATTERN}"/>
+            <Policies>
+                <TimeBasedTriggeringPolicy/>
+                <SizeBasedTriggeringPolicy size="20 MB"/>
+            </Policies>
+            <DefaultRolloverStrategy max="30"/>
+        </RollingFile>
+
+        <!-- 异步，需要通过AppenderRef来指定要对哪种输出源进行异步 -->
+        <Async name="async-console">
+            <AppenderRef ref="RollingFileInfo"/>
+            <AppenderRef ref="RollingFileError"/>
+        </Async>
+
+    </appenders>
+
+    <loggers>
+        <!-- 各个节点中已经将日志配成了debug，如果想打debug日志只需要将此处改成debug即可。如果root节点的日志级别和节点内的日志级别不一致，默认打印级别更高的日志 -->
+        <root level="info">
+            <appender-ref ref="async-console"/>
+            <appender-ref ref="console-log"/>
+            <appender-ref ref="temp-log"/>
+        </root>
+    </loggers>
+</configuration>
