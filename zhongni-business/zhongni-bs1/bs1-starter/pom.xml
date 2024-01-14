@@ -20,8 +20,7 @@
         <output.dependence.file.path>lib/</output.dependence.file.path>
         <output.resource.file.path>resources/</output.resource.file.path>
         <target.class-path>target/classes/</target.class-path>
-        <final-business-path>target/${project.artifactId}</final-business-path>
-        <final-res-path>${final-business-path}/resources</final-res-path>
+        <final-res-path>${project.artifactId}/resources</final-res-path>
         <app-name>${project.artifactId}-${project.version}</app-name>
         <real-app-name>server</real-app-name>
     </properties>
@@ -63,13 +62,13 @@
                         <exclude>*.properties</exclude>
                         <exclude>*.yml</exclude>
                         <exclude>*.xml</exclude>
-                        <exclude>*.txt</exclude>
                         <exclude>*.sh</exclude>
                         <exclude>*.bat</exclude>
                         <exclude>*.cmd</exclude>
                         <exclude>**/static/**</exclude>
                         <exclude>**/templates/**</exclude>
                         <exclude>**/db/**</exclude>
+                        <exclude>**/Version.txt</exclude>
                     </excludes>
                     <archive>
                         <manifest>
@@ -97,6 +96,28 @@
                 <groupId>org.apache.maven.plugins</groupId>
                 <artifactId>maven-dependency-plugin</artifactId>
                 <executions>
+                    <!-- 复制入口jar包到对应目录下 -->
+                    <execution>
+                        <id>copy-app-jar</id>
+                        <phase>package</phase>
+                        <goals>
+                            <goal>copy</goal>
+                        </goals>
+                        <configuration>
+                            <artifactItems>
+                                <artifactItem>
+                                    <groupId>${project.groupId}</groupId>
+                                    <artifactId>${project.artifactId}</artifactId>
+                                    <version>${project.version}</version>
+                                    <type>jar</type>
+                                    <overWrite>true</overWrite>
+                                    <outputDirectory>${project.build.directory}/${project.artifactId}</outputDirectory>
+                                    <destFileName>${real-app-name}.jar</destFileName>
+                                </artifactItem>
+                            </artifactItems>
+                        </configuration>
+                    </execution>
+                    <!-- 复制所有的依赖jar包到lib目录下 -->
                     <execution>
                         <id>copy-dependencies</id>
                         <phase>package</phase>
@@ -110,53 +131,54 @@
                 </executions>
             </plugin>
 
-            <!-- 将maven打包后的原始文件路径进行进一步的整理 -->
+            <!-- 复制依赖的jar包与资源文件，进行目录整合 -->
             <plugin>
                 <groupId>org.apache.maven.plugins</groupId>
-                <artifactId>maven-antrun-plugin</artifactId>
-                <version>1.8</version>
+                <artifactId>maven-resources-plugin</artifactId>
+                <version>3.2.0</version>
                 <executions>
                     <execution>
+                        <id>copy-resources</id>
                         <phase>package</phase>
                         <goals>
-                            <goal>run</goal>
+                            <goal>copy-resources</goal>
                         </goals>
                         <configuration>
-                            <target>
-                                <delete dir="${final-business-path}"/>
-                                <mkdir dir="${final-business-path}"/>
-                                <mkdir dir="${final-res-path}"/>
-                                <mkdir dir="${final-res-path}/static"/>
-                                <copy file="target/${app-name}.jar" tofile="${final-business-path}/${real-app-name}.jar"/>
-                                <move todir="${final-business-path}/lib">
-                                    <fileset dir="target/lib"/>
-                                </move>
-                                <!-- 转移资源文件到${final-res-path}路径 -->
-                                <copy todir="${final-res-path}">
-                                    <fileset dir="${target.class-path}">
-                                        <include name="**/static/**"/>
-                                        <include name="**/templates/**"/>
-                                        <include name="**/db/**"/>
-                                        <include name="**/*.txt"/>
-                                        <include name="**/*.properties"/>
-                                        <include name="**/*.keystore"/>
-                                        <include name="**/*.yml"/>
-                                        <include name="**/*.csv"/>
-                                        <include name="**/*.xml"/>
-                                        <!-- 版本号文件直接放到根目录，不需要转移到resources文件夹 -->
-                                        <exclude name="**/Version.txt"/>
-                                    </fileset>
-                                </copy>
-                                <!-- 转移执行文件到${final-business-path}路径 -->
-                                <copy todir="${final-business-path}">
-                                    <fileset dir="${target.class-path}">
-                                        <include name="**/*.bat"/>
-                                        <include name="**/*.sh"/>
-                                        <include name="**/*.cmd"/>
-                                        <include name="**/Version.txt"/>
-                                    </fileset>
-                                </copy>
-                            </target>
+                            <outputDirectory>${project.build.directory}</outputDirectory>
+                            <resources>
+                                <resource>
+                                    <directory>target/lib</directory>
+                                    <includes>
+                                        <include>*</include>
+                                    </includes>
+                                    <targetPath>${project.artifactId}/lib</targetPath>
+                                </resource>
+                                <resource>
+                                    <directory>${target.class-path}</directory>
+                                    <includes>
+                                        <include>**/static/**</include>
+                                        <include>**/templates/**</include>
+                                        <include>**/db/**</include>
+                                        <include>**/*.properties</include>
+                                        <include>**/*.keystore</include>
+                                        <include>**/*.yml</include>
+                                        <include>**/*.csv</include>
+                                        <include>**/*.xml</include>
+                                        <include>**/Version.txt</include>
+                                    </includes>
+                                    <targetPath>${final-res-path}</targetPath>
+                                </resource>
+                                <resource>
+                                    <directory>${target.class-path}</directory>
+                                    <includes>
+                                        <include>**/*.bat</include>
+                                        <include>**/*.sh</include>
+                                        <include>**/*.cmd</include>
+                                        <include>**/Version.txt</include>
+                                    </includes>
+                                    <targetPath>${project.artifactId}</targetPath>
+                                </resource>
+                            </resources>
                         </configuration>
                     </execution>
                 </executions>
