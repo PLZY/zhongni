@@ -3,12 +3,11 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>com.zhongni</groupId>
-		<artifactId>base-parent</artifactId>
+		<artifactId>zhongni-parent</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
 	<modelVersion>4.0.0</modelVersion>
-	<groupId>com.zhongni</groupId>
 	<artifactId>zhongni-gateway</artifactId>
 	<version>1.0.0</version>
 	<name>zhongni-gateway</name>
@@ -111,6 +110,11 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
+		</dependency>
+
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
 	</dependencies>
 
