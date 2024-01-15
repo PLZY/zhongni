@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.zhongni</groupId>
+        <artifactId>zhongni-parent</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <modelVersion>4.0.0</modelVersion>
+    <packaging>pom</packaging>
+    <modules>
+        <module>bs1-common</module>
+        <module>bs1-entity</module>
+        <module>bs1-mapper</module>
+        <module>bs1-service</module>
+        <module>bs1-controller</module>
+        <module>bs1-starter</module>
+        <module>bs1-task</module>
+    </modules>
+
+    <artifactId>zhongni-bs1</artifactId>
+    <version>1.0.0</version>
+    <name>zhongni-bs1</name>
+    <description>zhongni project for Spring Boot</description>
+    <properties>
+        <bs1-mapper>1.0.0</bs1-mapper>
+        <bs1-common>1.0.0</bs1-common>
+        <bs1-entity>1.0.0</bs1-entity>
+        <bs1-service>1.0.0</bs1-service>
+        <bs1-starter>1.0.0</bs1-starter>
+        <bs1-controller>1.0.0</bs1-controller>
+        <bs1-task>1.0.0</bs1-task>
+    </properties>
+
+
+    <dependencyManagement>
+        <dependencies>
+            <dependency>
+                <groupId>com.zhongni</groupId>
+                <artifactId>bs1-mapper</artifactId>
+                <version>${bs1-mapper}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.zhongni</groupId>
+                <artifactId>bs1-common</artifactId>
+                <version>${bs1-common}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.zhongni</groupId>
+                <artifactId>bs1-entity</artifactId>
+                <version>${bs1-entity}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.zhongni</groupId>
+                <artifactId>bs1-service</artifactId>
+                <version>${bs1-service}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.zhongni</groupId>
+                <artifactId>bs1-task</artifactId>
+                <version>${bs1-task}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.zhongni</groupId>
+                <artifactId>bs1-starter</artifactId>
+                <version>${bs1-starter}</version>
+                <scope>compile</scope>
+            </dependency>
+            <dependency>
+                <groupId>com.zhongni</groupId>
+                <artifactId>bs1-controller</artifactId>
+                <version>${bs1-controller}</version>
+                <scope>compile</scope>
+            </dependency>
+        </dependencies>
+    </dependencyManagement>
+
+    <dependencies>
+        <!-- 所有子工程都需要的依赖，直接在父工程中声明  -->
+        <dependency>
+            <groupId>com.alibaba</groupId>
+            <artifactId>fastjson</artifactId>
+        </dependency>
+
+        <!-- caffeine 本地缓存-->
+        <dependency>
+            <groupId>com.github.ben-manes.caffeine</groupId>
+            <artifactId>caffeine</artifactId>
+        </dependency>
+
+        <!-- Redis缓存-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-redis</artifactId>
+        </dependency>
+
+        <!-- 联合主键所需依赖 -->
+        <dependency>
+            <groupId>com.github.jeffreyning</groupId>
+            <artifactId>mybatisplus-plus</artifactId>
+        </dependency>
+
+        <!-- lombok依赖 -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+        </dependency>
+
+        <!-- 排除所有springboot默认使用的日志依赖 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-logging</artifactId>
+            <exclusions>
+                <exclusion>
+                    <groupId>*</groupId>
+                    <artifactId>*</artifactId>
+                </exclusion>
+            </exclusions>
+        </dependency>
+
+        <!-- 使用log4j2日志 -->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-log4j2</artifactId>
+        </dependency>
+
+        <dependency>
+            <groupId>org.apache.commons</groupId>
+            <artifactId>commons-lang3</artifactId>
+        </dependency>
+    </dependencies>
+</project>

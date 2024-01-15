@@ -1,0 +1,44 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0"
+         xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+    <parent>
+        <groupId>com.zhongni</groupId>
+        <artifactId>zhongni-bs1</artifactId>
+        <version>1.0.0</version>
+    </parent>
+
+    <artifactId>bs1-controller</artifactId>
+    <version>1.0.0</version>
+    <name>bs1-controller</name>
+    <modelVersion>4.0.0</modelVersion>
+
+    <properties>
+        <maven.compiler.source>8</maven.compiler.source>
+        <maven.compiler.target>8</maven.compiler.target>
+        <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
+        <output.dependence.file.path>lib/</output.dependence.file.path>
+        <output.resource.file.path>resources/</output.resource.file.path>
+        <target.class-path>target/classes/</target.class-path>
+        <final-business-path>target/${project.artifactId}</final-business-path>
+        <final-res-path>${final-business-path}/resources</final-res-path>
+        <app-name>${project.artifactId}-${project.version}</app-name>
+        <real-app-name>server</real-app-name>
+    </properties>
+
+    <dependencies>
+        <dependency>
+            <groupId>com.zhongni</groupId>
+            <artifactId>bs1-service</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>com.zhongni</groupId>
+            <artifactId>bs1-task</artifactId>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+</project>
