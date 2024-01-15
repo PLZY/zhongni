@@ -3,7 +3,7 @@
 	xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
 	<parent>
 		<groupId>com.zhongni</groupId>
-		<artifactId>base-parent</artifactId>
+        <artifactId>zhongni-parent</artifactId>
 		<version>1.0.0</version>
 	</parent>
 
