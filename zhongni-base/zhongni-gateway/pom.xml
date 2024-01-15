@@ -95,11 +95,18 @@
 			<artifactId>mybatis-plus-boot-starter</artifactId>
 		</dependency>
 
+		<!-- SpringCloud 2020.* 版本把bootstrap禁用了，导致在读取文件的时候读取不到而报错，开启Spring Cloud 应用程序启动时加载bootstrap配置文件-->
+		<dependency>
+			<groupId>org.springframework.cloud</groupId>
+			<artifactId>spring-cloud-starter-bootstrap</artifactId>
+		</dependency>
+
 		<!-- nacos-config配置中心依赖 -->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
 			<artifactId>spring-cloud-starter-alibaba-nacos-config</artifactId>
 		</dependency>
+
 		<!-- nacos-discovery注册中心依赖 -->
 		<dependency>
 			<groupId>com.alibaba.cloud</groupId>
@@ -110,11 +117,6 @@
 		<dependency>
 			<groupId>org.springframework.cloud</groupId>
 			<artifactId>spring-cloud-starter-gateway</artifactId>
-		</dependency>
-
-		<dependency>
-			<groupId>org.springframework.cloud</groupId>
-			<artifactId>spring-cloud-starter-bootstrap</artifactId>
 		</dependency>
 	</dependencies>
 
