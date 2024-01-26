@@ -22,18 +22,17 @@
 ### zhongni-base（基础模块）
 __________________________
 
-- **zhongni-gateway - 网关** <br/>
+- **<font color=#0099ff size=4>zhongni-gateway - 网关</font>** <br/>
     > 待补充
 __________________________
 
-- **zhongni-oauth - 鉴权** <br/>
+- **<font color=#0099ff size=4>zhongni-oauth - 鉴权</font>** <br/>
   > 待补充
 
 
 ### zhongni-business（业务子系统）
 __________________________
-
-- **zhongni-bs1 - 业务系统1** <br/>
+- **<font color=#0099ff size=4>zhongni-bs1 - 业务系统1</font>** <br/>
 1) ***bs1-start（引导模块）*** <br/>
    > ZhonniApplication.java - 系统启动类 <br/>
    > resources - 包含系统、日志配置文件、数据库脚本、启停脚本、项目版本信息、邮件模板静态文件等 <br/>
@@ -70,24 +69,24 @@ __________________________
    > task - 基于Spring  @Scheduled注解的定时任务 <br/>
 __________________________
 
-- **zhongni-bs2 - 业务系统2** <br/>
+- **<font color=#0099ff size=4>zhongni-bs2 - 业务系统2</font>** <br/>
    > 待补充
 
 ### zhongni-parent（公共父模块）
 __________________________
 
-- **pom.xml - 版本管理** <br/>
+- **<font color=#0099ff size=4>pom.xml - 版本管理</font>** <br/>
     > 所有项目的parent,用于三方Jar包的统一管理
 	
 ### zhongni-template（模板模块）
 __________________________
 
-- **zhongni-business-template（from bs1） - 业务子系统的简单模板** <br/>
+- **<font color=#0099ff size=4>zhongni-business-template（from bs1） - 业务子系统的简单模板</font>** <br/>
     > 脱胎于bs1子系统，一个更加干净的子系统模板，只保留最原始的结构和最基础的依赖 <br/>
 	> 日后如果需要，可以快速引入新的东西，成为一个全新的子系统模块
 __________________________
 
-- **zhongni-simple-template（from gateway） - 基础模块的简单模板** <br/>
+- **<font color=#0099ff size=4>zhongni-simple-template（from gateway） - 基础模块的简单模板</font>** <br/>
   > 脱胎于zhongni-gateway基础模块，一个更加干净的基础模块模板，只保留最原始的结构和最基础的依赖 <br/>
   > 日后如果需要，可以快速引入新的东西，成为一个全新的基础模块
   
