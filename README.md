@@ -23,11 +23,13 @@
 __________________________
 
 - **<font color=#0099ff size=4>zhongni-gateway - 网关</font>** <br/>
+
     > 待补充
 __________________________
 
 - **<font color=#0099ff size=4>zhongni-oauth - 鉴权</font>** <br/>
-  > 待补充
+
+    > 待补充
 
 
 ### zhongni-business（业务子系统）
@@ -87,7 +89,7 @@ __________________________
 __________________________
 
 - **<font color=#0099ff size=4>zhongni-simple-template（from gateway） - 基础模块的简单模板</font>** <br/>
-  > 脱胎于zhongni-gateway基础模块，一个更加干净的基础模块模板，只保留最原始的结构和最基础的依赖 <br/>
+    > 脱胎于zhongni-gateway基础模块，一个更加干净的基础模块模板，只保留最原始的结构和最基础的依赖 <br/>
   > 日后如果需要，可以快速引入新的东西，成为一个全新的基础模块
   
 
