@@ -72,12 +72,14 @@ __________________________
 __________________________
 
 - **<font color=#0099ff size=4>zhongni-bs2 - 业务系统2</font>** <br/>
+
    > 待补充
 
 ### zhongni-parent（公共父模块）
 __________________________
 
 - **<font color=#0099ff size=4>pom.xml - 版本管理</font>** <br/>
+
     > 所有项目的parent,用于三方Jar包的统一管理
 	
 ### zhongni-template（模板模块）
