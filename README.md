@@ -9,7 +9,7 @@
 - **分布式相关：Spring Gateway、Nacos、Dubbo3**
 - **系统鉴权：Spring Security**
 - **缓存：Redis、Caffeine**
-- **数据库：*MySQL8.0*
+- **数据库：MySQL8.0**
 - **消息中间件（MQ）：待引入**
 - **定时任务：待引入**
 - **依赖管理/打包：MAVEN**
