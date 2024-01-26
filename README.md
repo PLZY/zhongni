@@ -5,17 +5,16 @@
 此项目其实主要是一些代码基础模板，方便日后我快速搭建开发环境，以及对Java相关技术的尝试和练习**
 
 ## 1、涉及技术栈：
-- **接口、业务层：Spring Boot**
-- **分布式相关：Spring Cloud Alibaba（nacos seata）、dubbo3.0**
+- **简单业务：Spring Boot、Mybatis / Mybatis-Plus**
+- **分布式相关：Spring Gateway、Nacos、Dubbo3**
 - **系统鉴权：Spring Security**
 - **缓存：Redis、Caffeine**
-- **持久层：Mybatis / Mybatis-Plus**
-- **序列化：FastJSON、JackSon**
-- **日志：Log4j2**
-- **MQ：待定**
+- **数据库：*MySQL8.0*
+- **消息中间件（MQ）：待引入**
+- **定时任务：待引入**
 - **依赖管理/打包：MAVEN**
 - **版本管理工具：GIT**
-- **其他相关技术依赖可在pom.xml中自行查看**
+- **其他技术：持续引入中**
 
 ## 2、层级结构
 
