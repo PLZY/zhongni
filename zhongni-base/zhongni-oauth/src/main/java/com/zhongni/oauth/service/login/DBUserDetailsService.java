@@ -1,9 +1,11 @@
 package com.zhongni.oauth.service.login;
 
 import com.baomidou.mybatisplus.core.conditions.query.LambdaQueryWrapper;
+import com.fasterxml.jackson.databind.util.BeanUtil;
 import com.zhongni.oauth.constants.OauthConstants;
 import com.zhongni.oauth.entity.auth.RoleInfo;
 import com.zhongni.oauth.entity.auth.UserRole;
+import com.zhongni.oauth.entity.login.UserAuthInfo;
 import com.zhongni.oauth.entity.user.UserInfo;
 import com.zhongni.oauth.enums.BusinessExceptionEnum;
 import com.zhongni.oauth.exception.BusinessException;
@@ -46,9 +48,13 @@ public class DBUserDetailsService implements UserDetailsService {
             throw new BusinessException(BusinessExceptionEnum.UN_RIGHT_NAME_AND_PASSWORD);
         }
 
-        return new User(user.getUserName(), user.getPassword(), OauthConstants.ENABLE.equals(user.getUserStatus()),
+        UserAuthInfo userAuthInfo = new UserAuthInfo(user.getUserName(), user.getPassword(), OauthConstants.ENABLE.equals(user.getUserStatus()),
                 true, true, true,
                 getAuthorities(user));
+        userAuthInfo.setOtherUserAuthInfoProperties(user.getId(), user.getUserNickName(),
+                user.getUserRealName(), user.getUserMobile(), user.getUserIdCard(),
+                user.getUserBirth(), user.getUserFrom(), user.getUserEmail(), user.getUserAddress(), user.getUserStatus(), user.getLastLoginTime());
+        return userAuthInfo;
     }
 
     private Collection<? extends GrantedAuthority> getAuthorities(UserInfo user) {

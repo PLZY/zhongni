@@ -32,6 +32,7 @@
         <lucene-version>8.11.2</lucene-version>
         <redission-version>3.19.0</redission-version>
         <UserAgentUtils-version>1.21</UserAgentUtils-version>
+        <jwt-version>0.11.5</jwt-version>
     </properties>
 
     <dependencyManagement>
@@ -123,6 +124,25 @@
                 <groupId>eu.bitwalker</groupId>
                 <artifactId>UserAgentUtils</artifactId>
                 <version>${UserAgentUtils-version}</version>
+            </dependency>
+
+            <!-- JWT -->
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-api</artifactId>
+                <version>${jwt-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-impl</artifactId>
+                <version>${jwt-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>io.jsonwebtoken</groupId>
+                <artifactId>jjwt-jackson</artifactId>
+                <version>${jwt-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

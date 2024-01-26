@@ -1,7 +1,7 @@
 package com.zhongni.oauth.handler;
 
-import com.fasterxml.jackson.databind.ObjectMapper;
-import com.zhongni.oauth.constants.OauthConstants;
+import com.alibaba.fastjson.JSON;
+import com.alibaba.fastjson.serializer.SerializerFeature;
 import com.zhongni.oauth.entity.resp.CommonResponse;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.http.HttpStatus;
@@ -19,16 +19,15 @@ import java.io.PrintWriter;
 @Slf4j
 public class CustomAccessDeniedHandler implements AccessDeniedHandler {
 
-    private final ObjectMapper objectMapper = new ObjectMapper();
-
     @Override
     public void handle(HttpServletRequest request, HttpServletResponse response, AccessDeniedException e) throws IOException, ServletException {
         response.setStatus(HttpStatus.FORBIDDEN.value());
         response.setContentType("application/json;charset=UTF-8");
         PrintWriter out = response.getWriter();
         log.error("Access Denied is Exception: {}", e.getMessage(), e);
-        CommonResponse<String> errorResponse =  CommonResponse.resp(OauthConstants.DEFAULT_ERROR_CODE, e.getMessage(), "");
-        out.write(objectMapper.writeValueAsString(errorResponse));
+        CommonResponse<String> errorResponse =  CommonResponse.resp(String.valueOf(HttpStatus.FORBIDDEN.value()),
+                HttpStatus.FORBIDDEN.getReasonPhrase() + ": " + e.getMessage(), "");
+        out.write(JSON.toJSONString(errorResponse, SerializerFeature.SortField));
         out.flush();
         out.close();
     }

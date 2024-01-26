@@ -1,7 +1,10 @@
 package com.zhongni.oauth.constants;
 
 public class OauthConstants {
+
     public static final String DEFAULT_ERROR_CODE = "-1";
+
+    public static final String SYSTEM_NAME = "/oauth";
     public static final String DEFAULT_SUCCESS_CODE = "0";
     public static final String NODE_DEFAULT_SUCCESS_CODE = "200";
 
@@ -39,6 +42,9 @@ public class OauthConstants {
      */
     public static final String DEFAULT_WALLET_PASSWORD = "888888";
     public static final String DEFAULT_IMAGE_PATH = "default@_@/home/img/1.png";
+
+    private static final String TOKEN_PREFIX = "Bearer ";
+    private static final String HEADER_STRING = "Authorization";
 
 
 }

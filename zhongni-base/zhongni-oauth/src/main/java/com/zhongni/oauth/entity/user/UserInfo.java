@@ -4,8 +4,15 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
+import com.zhongni.oauth.constants.OauthConstants;
+import org.springframework.security.core.CredentialsContainer;
+import org.springframework.security.core.GrantedAuthority;
+import org.springframework.security.core.userdetails.User;
+import org.springframework.security.core.userdetails.UserDetails;
+import org.springframework.util.Assert;
+
 import java.io.Serializable;
-import java.util.Date;
+import java.util.*;
 
 /**
  * 
@@ -13,6 +20,7 @@ import java.util.Date;
  */
 @TableName(value ="user_info")
 public class UserInfo implements Serializable {
+
     /**
      * ID
      */
@@ -92,6 +100,18 @@ public class UserInfo implements Serializable {
     @TableField(exist = false)
     private static final long serialVersionUID = 1L;
 
+    @TableField(exist = false)
+    private boolean accountNonExpired = true;
+
+    @TableField(exist = false)
+    private boolean accountNonLocked = true;
+
+    @TableField(exist = false)
+    private boolean credentialsNonExpired = true;
+
+    @TableField(exist = false)
+    private Set<GrantedAuthority> authorities;
+
     /**
      * ID
      */
@@ -154,6 +174,7 @@ public class UserInfo implements Serializable {
     public String getPassword() {
         return password;
     }
+
 
     /**
      * 密码
@@ -300,82 +321,5 @@ public class UserInfo implements Serializable {
      */
     public void setUpdateTime(Date updateTime) {
         this.updateTime = updateTime;
-    }
-
-    @Override
-    public boolean equals(Object that) {
-        if (this == that) {
-            return true;
-        }
-        if (that == null) {
-            return false;
-        }
-        if (getClass() != that.getClass()) {
-            return false;
-        }
-        UserInfo other = (UserInfo) that;
-        return (this.getId() == null ? other.getId() == null : this.getId().equals(other.getId()))
-            && (this.getUserName() == null ? other.getUserName() == null : this.getUserName().equals(other.getUserName()))
-            && (this.getUserNickName() == null ? other.getUserNickName() == null : this.getUserNickName().equals(other.getUserNickName()))
-            && (this.getUserRealName() == null ? other.getUserRealName() == null : this.getUserRealName().equals(other.getUserRealName()))
-            && (this.getPassword() == null ? other.getPassword() == null : this.getPassword().equals(other.getPassword()))
-            && (this.getUserMobile() == null ? other.getUserMobile() == null : this.getUserMobile().equals(other.getUserMobile()))
-            && (this.getUserIdCard() == null ? other.getUserIdCard() == null : this.getUserIdCard().equals(other.getUserIdCard()))
-            && (this.getUserBirth() == null ? other.getUserBirth() == null : this.getUserBirth().equals(other.getUserBirth()))
-            && (this.getUserFrom() == null ? other.getUserFrom() == null : this.getUserFrom().equals(other.getUserFrom()))
-            && (this.getUserEmail() == null ? other.getUserEmail() == null : this.getUserEmail().equals(other.getUserEmail()))
-            && (this.getUserAddress() == null ? other.getUserAddress() == null : this.getUserAddress().equals(other.getUserAddress()))
-            && (this.getUserStatus() == null ? other.getUserStatus() == null : this.getUserStatus().equals(other.getUserStatus()))
-            && (this.getLastLoginTime() == null ? other.getLastLoginTime() == null : this.getLastLoginTime().equals(other.getLastLoginTime()))
-            && (this.getCreateTime() == null ? other.getCreateTime() == null : this.getCreateTime().equals(other.getCreateTime()))
-            && (this.getUpdateTime() == null ? other.getUpdateTime() == null : this.getUpdateTime().equals(other.getUpdateTime()));
-    }
-
-    @Override
-    public int hashCode() {
-        final int prime = 31;
-        int result = 1;
-        result = prime * result + ((getId() == null) ? 0 : getId().hashCode());
-        result = prime * result + ((getUserName() == null) ? 0 : getUserName().hashCode());
-        result = prime * result + ((getUserNickName() == null) ? 0 : getUserNickName().hashCode());
-        result = prime * result + ((getUserRealName() == null) ? 0 : getUserRealName().hashCode());
-        result = prime * result + ((getPassword() == null) ? 0 : getPassword().hashCode());
-        result = prime * result + ((getUserMobile() == null) ? 0 : getUserMobile().hashCode());
-        result = prime * result + ((getUserIdCard() == null) ? 0 : getUserIdCard().hashCode());
-        result = prime * result + ((getUserBirth() == null) ? 0 : getUserBirth().hashCode());
-        result = prime * result + ((getUserFrom() == null) ? 0 : getUserFrom().hashCode());
-        result = prime * result + ((getUserEmail() == null) ? 0 : getUserEmail().hashCode());
-        result = prime * result + ((getUserAddress() == null) ? 0 : getUserAddress().hashCode());
-        result = prime * result + ((getUserStatus() == null) ? 0 : getUserStatus().hashCode());
-        result = prime * result + ((getLastLoginTime() == null) ? 0 : getLastLoginTime().hashCode());
-        result = prime * result + ((getCreateTime() == null) ? 0 : getCreateTime().hashCode());
-        result = prime * result + ((getUpdateTime() == null) ? 0 : getUpdateTime().hashCode());
-        return result;
-    }
-
-    @Override
-    public String toString() {
-        StringBuilder sb = new StringBuilder();
-        sb.append(getClass().getSimpleName());
-        sb.append(" [");
-        sb.append("Hash = ").append(hashCode());
-        sb.append(", id=").append(id);
-        sb.append(", userName=").append(userName);
-        sb.append(", userNickName=").append(userNickName);
-        sb.append(", userRealName=").append(userRealName);
-        sb.append(", password=").append(password);
-        sb.append(", userMobile=").append(userMobile);
-        sb.append(", userIdCard=").append(userIdCard);
-        sb.append(", userBirth=").append(userBirth);
-        sb.append(", userFrom=").append(userFrom);
-        sb.append(", userEmail=").append(userEmail);
-        sb.append(", userAddress=").append(userAddress);
-        sb.append(", userStatus=").append(userStatus);
-        sb.append(", lastLoginTime=").append(lastLoginTime);
-        sb.append(", createTime=").append(createTime);
-        sb.append(", updateTime=").append(updateTime);
-        sb.append(", serialVersionUID=").append(serialVersionUID);
-        sb.append("]");
-        return sb.toString();
     }
 }
