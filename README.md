@@ -4,7 +4,7 @@
 实力和精力有限，如有谬误还望指正 ^_^**
 
 ## 1、涉及技术栈：
-- **接口、业务层：Spring Boot、Spring Cloud Alibaba**
+- **接口、业务层：Spring Boot**
 - **分布式相关：Spring Cloud Alibaba（nacos seata）、dubbo3.0**
 - **系统鉴权：Spring Security**
 - **缓存：Redis、Caffeine**
