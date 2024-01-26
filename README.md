@@ -4,7 +4,9 @@
 实力和精力有限，如有谬误还望指正 ^_^**
 
 ## 1、涉及技术栈：
-- **接口、业务层：SpringBoot**
+- **接口、业务层：Spring Boot、Spring Cloud Alibaba**
+- **分布式相关：Spring Cloud Alibaba（nacos seata）、dubbo3.0**
+- **系统鉴权：Spring Security**
 - **缓存：Redis、Caffeine**
 - **持久层：Mybatis / Mybatis-Plus**
 - **序列化：FastJSON、JackSon**
@@ -23,7 +25,7 @@ __________________________
     > 待补充
 __________________________
 
-- **zhongni-brm - 基础资源**
+- **zhongni-oauth - 鉴权**
   > 待补充
 
 
