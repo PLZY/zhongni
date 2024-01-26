@@ -22,11 +22,11 @@
 ### zhongni-base（基础模块）
 __________________________
 
-- **zhongni-gateway - 网关**<br/>
+- **zhongni-gateway - 网关** <br/>
     > 待补充
 __________________________
 
-- **zhongni-oauth - 鉴权**<br/>
+- **zhongni-oauth - 鉴权** <br/>
   > 待补充
 
 
@@ -71,24 +71,24 @@ __________________________
 __________________________
 
 - **zhongni-bs2 - 业务系统2** <br/>
-> 待补充
+   > 待补充
 
 ### zhongni-parent（公共父模块）
 __________________________
 
-- **pom.xml - 版本管理**<br/>
+- **pom.xml - 版本管理** <br/>
     > 所有项目的parent,用于三方Jar包的统一管理
 	
 ### zhongni-template（模板模块）
 __________________________
 
-- **zhongni-business-template（from bs1） - 业务子系统的简单模板**<br/>
-    > 脱胎于bs1子系统，一个更加干净的子系统模板，只保留最原始的结构和最基础的依赖<br/>
+- **zhongni-business-template（from bs1） - 业务子系统的简单模板** <br/>
+    > 脱胎于bs1子系统，一个更加干净的子系统模板，只保留最原始的结构和最基础的依赖 <br/>
 	> 日后如果需要，可以快速引入新的东西，成为一个全新的子系统模块
 __________________________
 
-- **zhongni-simple-template（from gateway） - 基础模块的简单模板**<br/>
-  > 脱胎于zhongni-gateway基础模块，一个更加干净的基础模块模板，只保留最原始的结构和最基础的依赖<br/>
+- **zhongni-simple-template（from gateway） - 基础模块的简单模板** <br/>
+  > 脱胎于zhongni-gateway基础模块，一个更加干净的基础模块模板，只保留最原始的结构和最基础的依赖 <br/>
   > 日后如果需要，可以快速引入新的东西，成为一个全新的基础模块
   
 
