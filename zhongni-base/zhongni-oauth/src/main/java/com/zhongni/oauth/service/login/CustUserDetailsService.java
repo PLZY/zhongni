@@ -27,7 +27,7 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 @Service
-public class DBUserDetailsService implements UserDetailsService {
+public class CustUserDetailsService implements UserDetailsService {
 
     @Resource
     private UserInfoService userInfoService;

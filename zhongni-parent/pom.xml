@@ -22,6 +22,7 @@
         <spring-cloud-version>2020.0.1</spring-cloud-version>
         <spring-cloud-alibaba-version>2021.1</spring-cloud-alibaba-version>
         <mysql.connector-version>8.0.30</mysql.connector-version>
+        <lombok-version>1.18.30</lombok-version>
         <mybatis-plus-version>3.4.2</mybatis-plus-version>
         <mybatis-plus-mpp>1.5.1-RELEASE</mybatis-plus-mpp>
         <commons-codec-version>1.15</commons-codec-version>
@@ -33,6 +34,7 @@
         <redission-version>3.19.0</redission-version>
         <UserAgentUtils-version>1.21</UserAgentUtils-version>
         <jwt-version>0.11.5</jwt-version>
+        <spring-security-auto-version>2.3.3.RELEASE</spring-security-auto-version>
     </properties>
 
     <dependencyManagement>
@@ -42,6 +44,12 @@
                 <groupId>org.springframework.boot</groupId>
                 <artifactId>spring-boot-dependencies</artifactId>
                 <version>${spring-boot-version}</version>
+                <exclusions>
+                    <exclusion>
+                        <groupId>org.projectlombok</groupId>
+                        <artifactId>lombok</artifactId>
+                    </exclusion>
+                </exclusions>
                 <type>pom</type>
                 <scope>import</scope>
             </dependency>
@@ -60,6 +68,13 @@
                 <version>${spring-cloud-alibaba-version}</version>
                 <type>pom</type>
                 <scope>import</scope>
+            </dependency>
+
+            <!-- lombok依赖 -->
+            <dependency>
+                <groupId>org.projectlombok</groupId>
+                <artifactId>lombok</artifactId>
+                <version>${lombok-version}</version>
             </dependency>
 
             <!-- mysql驱动引入 -->
@@ -143,6 +158,12 @@
                 <groupId>io.jsonwebtoken</groupId>
                 <artifactId>jjwt-jackson</artifactId>
                 <version>${jwt-version}</version>
+            </dependency>
+
+            <dependency>
+                <groupId>org.springframework.security.oauth.boot</groupId>
+                <artifactId>spring-security-oauth2-autoconfigure</artifactId>
+                <version>${spring-security-auto-version}</version>
             </dependency>
         </dependencies>
     </dependencyManagement>

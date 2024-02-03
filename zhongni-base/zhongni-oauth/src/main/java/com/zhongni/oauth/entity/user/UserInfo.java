@@ -4,21 +4,19 @@ import com.baomidou.mybatisplus.annotation.IdType;
 import com.baomidou.mybatisplus.annotation.TableField;
 import com.baomidou.mybatisplus.annotation.TableId;
 import com.baomidou.mybatisplus.annotation.TableName;
-import com.zhongni.oauth.constants.OauthConstants;
-import org.springframework.security.core.CredentialsContainer;
+import lombok.Data;
 import org.springframework.security.core.GrantedAuthority;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.util.Assert;
 
 import java.io.Serializable;
-import java.util.*;
+import java.util.Date;
+import java.util.Set;
 
 /**
  * 
  * @TableName user_info
  */
 @TableName(value ="user_info")
+@Data
 public class UserInfo implements Serializable {
 
     /**

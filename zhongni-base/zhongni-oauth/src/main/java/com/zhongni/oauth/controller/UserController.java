@@ -1,14 +1,11 @@
 package com.zhongni.oauth.controller;
 
+import com.zhongni.oauth.custom.token.CustUsernamePasswordAuthenticationToken;
 import com.zhongni.oauth.entity.resp.CommonResponse;
 import com.zhongni.oauth.jwt.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;
-import org.springframework.security.authentication.AuthenticationProvider;
 import org.springframework.security.authentication.UsernamePasswordAuthenticationToken;
 import org.springframework.security.core.Authentication;
-import org.springframework.security.core.userdetails.User;
-import org.springframework.security.core.userdetails.UserDetails;
-import org.springframework.security.core.userdetails.UserDetailsService;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -21,18 +18,37 @@ import javax.annotation.Resource;
 public class UserController {
 
     @Resource
-    private AuthenticationProvider authenticationProvider;
+    private AuthenticationManager authenticationManager;
 
     @Resource
     private JwtTokenProvider jwtTokenProvider;
-    @Resource
-    private UserDetailsService dBUserDetailsService;
 
-
-     @GetMapping("/login")
-     private CommonResponse<String> aaa(@RequestParam String userName, @RequestParam String password){
+    /**
+     * 简单登录（使用spring security自带逻辑）
+     * @param userName
+     * @param password
+     * @return
+     */
+     @GetMapping("/sample/login")
+     private CommonResponse<String> sampleLogin(@RequestParam String userName, @RequestParam String password){
          //Authenticate the user
-         Authentication authenticate = authenticate(userName, password);
+         Authentication authenticate = sampleAuthenticate(userName, password);
+         //Generate a token with the authentication information
+         final String token = jwtTokenProvider.generateToken(authenticate);
+         //Return the token to the user
+         return CommonResponse.success(token);
+     }
+
+    /**
+     * 自定义登录（使用自定义的逻辑）
+     * @param userName
+     * @param password
+     * @return
+     */
+     @GetMapping("/cust/login")
+     private CommonResponse<String> custLogin(@RequestParam String userName, @RequestParam String password){
+         //Authenticate the user
+         Authentication authenticate = custAuthenticate(userName, password);
          //Generate a token with the authentication information
          final String token = jwtTokenProvider.generateToken(authenticate);
          //Return the token to the user
@@ -45,7 +61,11 @@ public class UserController {
         return "zhangsan";
     }
 
-    private Authentication authenticate(String username, String password){
-        return authenticationProvider.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+    private Authentication sampleAuthenticate(String username, String password){
+        return authenticationManager.authenticate(new UsernamePasswordAuthenticationToken(username, password));
+    }
+
+    private Authentication custAuthenticate(String username, String password){
+        return authenticationManager.authenticate(new CustUsernamePasswordAuthenticationToken(username, password));
     }
 }

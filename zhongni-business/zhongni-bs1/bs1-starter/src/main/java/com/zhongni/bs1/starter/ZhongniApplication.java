@@ -1,6 +1,5 @@
 package com.zhongni.bs1.starter;
 
-import com.github.jeffreyning.mybatisplus.conf.EnableMPP;
 import lombok.extern.slf4j.Slf4j;
 import org.mybatis.spring.annotation.MapperScan;
 import org.springframework.boot.SpringApplication;
@@ -16,7 +15,6 @@ import java.net.UnknownHostException;
 @MapperScan("com.zhongni.bs1.mapper")
 @ComponentScan(basePackages={"com.zhongni"})
 @EnableScheduling
-@EnableMPP
 @Slf4j
 @PropertySource(value = {"classpath:cust-business.properties", "classpath:cust-email.properties"})
 // 排除DataSourceAutoConfiguration自动配置类，后续自动创建数据库时会在配置类中进行配置

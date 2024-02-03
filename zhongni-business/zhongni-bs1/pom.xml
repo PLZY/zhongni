@@ -101,12 +101,6 @@
             <artifactId>spring-boot-starter-data-redis</artifactId>
         </dependency>
 
-        <!-- 联合主键所需依赖 -->
-        <dependency>
-            <groupId>com.github.jeffreyning</groupId>
-            <artifactId>mybatisplus-plus</artifactId>
-        </dependency>
-
         <!-- lombok依赖 -->
         <dependency>
             <groupId>org.projectlombok</groupId>

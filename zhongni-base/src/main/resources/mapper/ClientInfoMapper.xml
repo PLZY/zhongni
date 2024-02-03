@@ -1,0 +1,27 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper
+        PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN"
+        "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace=".mapper.ClientInfoMapper">
+
+    <resultMap id="BaseResultMap" type=".entity.ClientInfo">
+            <id property="id" column="id" jdbcType="BIGINT"/>
+            <result property="clientId" column="client_id" jdbcType="VARCHAR"/>
+            <result property="clientName" column="client_name" jdbcType="VARCHAR"/>
+            <result property="clientSecret" column="client_secret" jdbcType="VARCHAR"/>
+            <result property="grantType" column="grant_type" jdbcType="VARCHAR"/>
+            <result property="redirectUri" column="redirect_uri" jdbcType="VARCHAR"/>
+            <result property="tokenUri" column="token_uri" jdbcType="VARCHAR"/>
+            <result property="authorizationUri" column="authorization_uri" jdbcType="VARCHAR"/>
+            <result property="clientPublicKey" column="client_public_key" jdbcType="VARCHAR"/>
+            <result property="clientPrivateKey" column="client_private_key" jdbcType="VARCHAR"/>
+            <result property="clientScope" column="client_scope" jdbcType="VARCHAR"/>
+    </resultMap>
+
+    <sql id="Base_Column_List">
+        id,client_id,client_name,
+        client_secret,grant_type,redirect_uri,
+        token_uri,authorization_uri,client_public_key,
+        client_private_key,client_scope
+    </sql>
+</mapper>
