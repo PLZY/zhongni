@@ -10,8 +10,6 @@
     <name>zhongni-parent</name>
     <description>zhongni-parent project for Spring Boot</description>
     <properties>
-        <maven.compiler.source>8</maven.compiler.source>
-        <maven.compiler.target>8</maven.compiler.target>
         <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
         <output.dependence.file.path>lib/</output.dependence.file.path>
         <output.resource.file.path>resources/</output.resource.file.path>

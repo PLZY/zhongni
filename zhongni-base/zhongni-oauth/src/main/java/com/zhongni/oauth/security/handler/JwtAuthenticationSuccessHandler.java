@@ -1,4 +1,4 @@
-package com.zhongni.oauth.handler;
+package com.zhongni.oauth.security.handler;
 
 import com.zhongni.oauth.jwt.JwtTokenProvider;
 import org.springframework.security.core.Authentication;

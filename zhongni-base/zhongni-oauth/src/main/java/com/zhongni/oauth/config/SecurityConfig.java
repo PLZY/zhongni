@@ -1,8 +1,10 @@
 package com.zhongni.oauth.config;
 
-import com.zhongni.oauth.custom.provider.CustAuthenticationProvider;
-import com.zhongni.oauth.handler.CustomAccessDeniedHandler;
-import com.zhongni.oauth.handler.CustomAuthenticationFailureHandler;
+import com.zhongni.oauth.security.entrypoint.JwtAuthenticationEntryPoint;
+import com.zhongni.oauth.security.handler.CustomAccessDeniedHandler;
+import com.zhongni.oauth.security.handler.CustomAuthenticationFailureHandler;
+import com.zhongni.oauth.security.handler.Oauth2SuccessHandler;
+import com.zhongni.oauth.security.provider.CustAuthenticationProvider;
 import com.zhongni.oauth.service.login.CustUserDetailsService;
 import com.zhongni.oauth.service.login.DBUserDetailsService;
 import org.springframework.beans.factory.annotation.Value;
@@ -37,7 +39,13 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
     private CustomAuthenticationFailureHandler customAuthenticationFailureHandler;
 
     @Resource
+    private JwtAuthenticationEntryPoint jwtAuthenticationEntryPoint;
+
+    @Resource
     private CustomAccessDeniedHandler customAccessDeniedHandler;
+
+    @Resource
+    private Oauth2SuccessHandler oauth2SuccessHandler;
 
     /**
      * 需要手动将AuthenticationManager类暴露在全局中，使我们能在其他功能实现上可以拿到这个认证管理器
@@ -87,8 +95,12 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
                 .and()
                 .formLogin()
                 .failureHandler(customAuthenticationFailureHandler)
-                .and()
-                .exceptionHandling().accessDeniedHandler(customAccessDeniedHandler); // 用户已经通过身份验证，但没有足够的权限来访问请求的资源;
+//                .successHandler(oauth2SuccessHandler)
+//                .and()
+//                .exceptionHandling()
+//                .authenticationEntryPoint(jwtAuthenticationEntryPoint) // 用户未登录却请求需要登录的资源
+//                .accessDeniedHandler(customAccessDeniedHandler) // 用户已经通过身份验证，但没有足够的权限来访问请求的资源
+        ;
 
     }
 }

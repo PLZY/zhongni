@@ -1,6 +1,6 @@
 package com.zhongni.oauth.controller;
 
-import com.zhongni.oauth.custom.token.CustUsernamePasswordAuthenticationToken;
+import com.zhongni.oauth.security.token.CustUsernamePasswordAuthenticationToken;
 import com.zhongni.oauth.entity.resp.CommonResponse;
 import com.zhongni.oauth.jwt.JwtTokenProvider;
 import org.springframework.security.authentication.AuthenticationManager;

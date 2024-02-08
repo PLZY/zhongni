@@ -162,7 +162,8 @@ public class CustClientInfo extends BaseClientDetails {
         BaseClientDetails clientDetails = new BaseClientDetails();
         clientDetails.setClientId((this.clientId));
         clientDetails.setClientSecret((this.clientSecret));
-        clientDetails.setAuthorizedGrantTypes(Lists.newArrayList(this.grantType));
+        // 必须配置了包含refresh_token的grantType，才会给前端返回refresh_token
+        clientDetails.setAuthorizedGrantTypes(Lists.newArrayList(this.grantType.split(",")));
         clientDetails.setScope(Lists.newArrayList(this.clientScope));
         // 默认情况下，客户端没有任何权限
         clientDetails.setAuthorities(Collections.emptyList());

@@ -1,4 +1,4 @@
-package com.zhongni.oauth.custom.repository;
+package com.zhongni.oauth.security.repository;
 
 import com.zhongni.oauth.entity.client.ClientInfo;
 import com.zhongni.oauth.service.client.ClientInfoService;

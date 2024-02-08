@@ -1,4 +1,4 @@
-package com.zhongni.oauth.handler;
+package com.zhongni.oauth.security.handler;
 
 import com.alibaba.fastjson.JSON;
 import com.alibaba.fastjson.serializer.SerializerFeature;

@@ -1,4 +1,4 @@
-package com.zhongni.oauth.custom.token;
+package com.zhongni.oauth.security.token;
 
 import org.springframework.security.authentication.AbstractAuthenticationToken;
 import org.springframework.security.core.GrantedAuthority;

@@ -1,6 +1,6 @@
-package com.zhongni.oauth.custom.provider;
+package com.zhongni.oauth.security.provider;
 
-import com.zhongni.oauth.custom.token.CustUsernamePasswordAuthenticationToken;
+import com.zhongni.oauth.security.token.CustUsernamePasswordAuthenticationToken;
 import org.springframework.security.authentication.*;
 import org.springframework.security.authentication.dao.DaoAuthenticationProvider;
 import org.springframework.security.core.Authentication;
