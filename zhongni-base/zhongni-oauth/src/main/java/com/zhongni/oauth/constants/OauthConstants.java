@@ -43,8 +43,11 @@ public class OauthConstants {
     public static final String DEFAULT_WALLET_PASSWORD = "888888";
     public static final String DEFAULT_IMAGE_PATH = "default@_@/home/img/1.png";
 
-    private static final String TOKEN_PREFIX = "Bearer ";
-    private static final String HEADER_STRING = "Authorization";
+    public static final String TOKEN_PREFIX = "Bearer ";
+    public static final String HEADER_STRING = "Authorization";
+
+    public static final String REDIS_AUTHORIZATION_CODE_KEY_PREFIX = "oauth:authorization:code:";
+    public static final String REDIS_ACCESS_TOKEN_KEY_PREFIX = "oauth:authorization:accessToken:";
 
 
 }

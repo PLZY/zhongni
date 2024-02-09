@@ -13,7 +13,7 @@ public enum BusinessExceptionEnum {
 
     REMOTE_REQUEST_FAIL("100-20001","远程调用失败"),
 
-    UN_RIGHT_NAME_AND_PASSWORD("100-30001","系统异常-用户名密码不正确"),
+    UN_RIGHT_NAME_AND_PASSWORD("100-30001","登录异常-用户名或密码不正确"),
     USER_EXCEPTION_ILLEGAL_LOGIN_INFO("100-40001", "用户异常-无法获取合法的登录信息，请确认当前用户是否已经登录"),
     USER_LOGIN_TIME_OUT("100-40002", "用户异常-登录信息已经失效"),
     ;

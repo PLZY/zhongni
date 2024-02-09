@@ -66,6 +66,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private DaoAuthenticationProvider daoAuthenticationProvider() {
         DaoAuthenticationProvider provider = new DaoAuthenticationProvider();
+        // 不隐藏用户没找到的异常
+        provider.setHideUserNotFoundExceptions(false);
         provider.setUserDetailsService(dbUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         //provider.setUserCache();
@@ -74,6 +76,8 @@ public class SecurityConfig extends WebSecurityConfigurerAdapter {
 
     private CustAuthenticationProvider custAuthenticationProvider() {
         CustAuthenticationProvider provider = new CustAuthenticationProvider();
+        // 不隐藏用户没找到的异常
+        provider.setHideUserNotFoundExceptions(false);
         provider.setUserDetailsService(custUserDetailsService);
         provider.setPasswordEncoder(passwordEncoder());
         //provider.setUserCache();
